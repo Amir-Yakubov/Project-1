@@ -1,0 +1,17 @@
+name: Run Tests
+
+on:
+  push:
+    branches-ignore: [dev, main, master]
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install --force
+      - name: Run Tests
+        run: npm run test:cov

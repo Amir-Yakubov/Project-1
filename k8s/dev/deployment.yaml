@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fund
+  labels:
+    app: fund
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fund
+  template:
+    metadata:
+      labels:
+        app: fund
+        tier: backend
+    spec:
+      containers:
+        - name: fund
+          image: 013689872623.dkr.ecr.eu-central-1.amazonaws.com/funds:latest
+          env:
+            - name: AWS_REGION
+              value: 'eu-central-1'
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret
+                  key: access_key_id
+                  optional: false
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret
+                  key: secret_access_key
+                  optional: false
+            - name: AWS_ENDPOINT
+              value: ''
+            - name: APP_PORT
+              value: '8080'
+            - name: NODE_ENV
+              value: 'dev'
+          ports:
+            - containerPort: 8080
