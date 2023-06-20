@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from '../controllers/app.controller';
-import { GemelnetService } from "../services/GemelnetService";
+import { FundController } from '../controllers/fundController';
+import { FundService } from "../services/fundService";
 import { HttpModule } from "@nestjs/axios";
-import { AdaptersModule } from "./adaptersModule";
+import { DynamoDBModule } from "./DynamoDBModule";
 
 @Module({
-  imports: [HttpModule, AdaptersModule],
-  controllers: [AppController],
-  providers: [GemelnetService],
+  imports: [HttpModule, DynamoDBModule],
+  controllers: [FundController],
+  providers: [FundService],
 })
 
 export class AppModule {}

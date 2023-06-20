@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from '../src/controllers/app.controller';
-import { GemelnetService } from "../src/services/GemelnetService";
+import { FundController } from '../src/controllers/fundController';
+import { FundService } from "../src/services/fundService";
 
 describe('AppController', () => {
-  let appController: AppController;
+  let appController: FundController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [GemelnetService],
+      controllers: [FundController],
+      providers: [FundService],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = app.get<FundController>(FundController);
   });
 
   describe('root', () => {
