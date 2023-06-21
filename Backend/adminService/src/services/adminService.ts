@@ -16,6 +16,6 @@ export class AdminService {
 
     public async getConfigurations(country_code: string) {
         console.log({country_code}, 'Received new get configurations request');
-        return `Masho ${country_code}`;
+        return `Masho Masho ${country_code}`;
     }
 }
