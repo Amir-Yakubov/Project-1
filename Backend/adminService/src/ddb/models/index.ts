@@ -1,0 +1,1 @@
+export { ConfigurationModelDefinition } from './ConfigurationsModel';

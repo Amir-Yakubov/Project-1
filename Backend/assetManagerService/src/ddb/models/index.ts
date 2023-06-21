@@ -1,0 +1,1 @@
+export { AssetsModelDefinition } from './AssetsModel';

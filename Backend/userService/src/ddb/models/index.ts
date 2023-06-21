@@ -1,0 +1,1 @@
+export { UserModelDefinition } from './UserModel';
