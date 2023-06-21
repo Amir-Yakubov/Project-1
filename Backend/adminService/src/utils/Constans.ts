@@ -5,3 +5,5 @@ export const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY ?? 'test'
 export const AWS_ENDPOINT = process.env.AWS_ENDPOINT ?? '';
 export const APP_PORT = process.env.APP_PORT ?? '3000';
 export const USER_SERVICE_URL = process.env.USER_SERVICE_URL ?? 'localhost:3005/';
+// export const USERNAME = process.env.USERNAME ?? 'dkjdnkdjnkjn';
+// export const PASSWORD = process.env.PASSWORD ?? 'amir';
