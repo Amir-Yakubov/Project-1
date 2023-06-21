@@ -1,1 +1,0 @@
-export { FundsModelDefinition } from './FundsModel';
