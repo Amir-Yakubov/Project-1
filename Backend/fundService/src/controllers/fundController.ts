@@ -1,27 +1,27 @@
-import { Controller, Get } from '@nestjs/common';
-import { FundService } from "../services/fundService";
-import { FUND_CLASSIFICATION_ENUM } from "../Enum/FUND_CLASSIFICATION_ENUM";
-import { SUB_SPECIALIZATION_ENUM } from "../Enum/SUB_SPECIALIZATION_ENUM";
+import {Controller, Get, Param} from '@nestjs/common';
+import { GemelService } from "../services/gemelService";
+import {FUND_CLASSIFICATION_ENUM} from "../Enum/FUND_CLASSIFICATION_ENUM";
+import {SUB_SPECIALIZATION_ENUM} from "../Enum/SUB_SPECIALIZATION_ENUM";
 
-@Controller('funds_service/')
+@Controller('fund_service/')
 export class FundController {
-  constructor(private gemelnetService: FundService) {}
+  constructor(private gemelService: GemelService) {}
 
-  @Get('heshtalmot_minayot')
-  public async getHeshtalmotMinayot(){
-    return await this.gemelnetService.getData(
-      FUND_CLASSIFICATION_ENUM.HESHTALMOT, SUB_SPECIALIZATION_ENUM.MENAYOT);
+  @Get('education_fund/:specialization')
+  public async getEducationFund(@Param('specialization') specialization:string){
+    return await this.gemelService.getData(
+      FUND_CLASSIFICATION_ENUM.EDUCATION_FUND, specialization);
   }
 
-  @Get('heshtalmot_klali')
-  public async getHeshtalmotKlali(){
-    return await this.gemelnetService.getData(
-      FUND_CLASSIFICATION_ENUM.HESHTALMOT, SUB_SPECIALIZATION_ENUM.KLALI);
+  @Get('provident_fund/:specialization')
+  public async getProvidentFund(@Param('specialization') specialization:string){
+    return await this.gemelService.getData(
+      FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND, specialization);
   }
 
-  @Get('heshtalmot_agah')
-  public async getHeshtalmotAgah(){
-    return await this.gemelnetService.getData(
-      FUND_CLASSIFICATION_ENUM.HESHTALMOT, SUB_SPECIALIZATION_ENUM.AGAH);
+  @Get('children_fund/:specialization')
+  public async getChildrenFund(@Param('specialization') specialization:string){
+    return await this.gemelService.getData(
+      FUND_CLASSIFICATION_ENUM.CHILDREN_FUND, specialization);
   }
 }
