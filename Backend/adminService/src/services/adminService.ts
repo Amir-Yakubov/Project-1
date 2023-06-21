@@ -10,6 +10,7 @@ export class AdminService {
     }
 
     public async setUserAsBlackListed(user_id: string){
+        console.log(`new blacklist request ${user_id}`);
         return await this.userServiceAdapter.setUserAsBlackListed(user_id);
     }
 
