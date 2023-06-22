@@ -1,3 +1,3 @@
 export const TABLES = {
-  USER: ''
+  USER: 'user_dev'
 };
