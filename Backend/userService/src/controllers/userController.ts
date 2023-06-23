@@ -1,7 +1,7 @@
 import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
 import {UserService} from "../services/userService";
-import {UserDTO} from "../dto/UserDTO";
 import {UserCredentialsDTO} from "../dto/UserCredentialsDTO";
+import {UserSignupInfoDTO} from "../dto/UserSignupDTO";
 
 @Controller('user_service/')
 export class UserController {
@@ -9,8 +9,8 @@ export class UserController {
     }
 
     @Post('signup')
-    public async signup(@Body() user: UserDTO) {
-        return await this.userService.signup(user);
+    public async signup(@Body() userSignupInfo: UserSignupInfoDTO) {
+        return await this.userService.signup(userSignupInfo);
     }
 
     @Put('login/:user_id')
@@ -18,6 +18,13 @@ export class UserController {
         @Param('user_id') user_id: string,
         @Body() use_credentials: UserCredentialsDTO) {
         return await this.userService.login(user_id, use_credentials);
+    }
+
+    @Put('update_user/:user_id')
+    public async updateUser(
+        @Param('user_id') user_id: string,
+        @Body() updateObject) {
+        return await this.userService.updateUser(user_id, updateObject);
     }
 
     @Get('user/:user_id')
