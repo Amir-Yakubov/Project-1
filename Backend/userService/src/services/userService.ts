@@ -35,15 +35,23 @@ export class UserService {
         const username = emailStr[0];
         const user: UserDTO = new UserDTO(user_id, username, userSignupInfo.password,
             userSignupInfo.email, DEFUALT_AVATAR_IMG_URL, false, 0);
-        const newUserFromDB =  await this.userModel.create(user);
+        const newUserFromDB = await this.userModel.create(user);
         return new UserResponseDTO(newUserFromDB.user_id, newUserFromDB.user_name,
             newUserFromDB.email, newUserFromDB.avatar_img_url, newUserFromDB.last_login);
     }
 
-    public async updateUser(user_id: string, updateObject){
+    public async updateUser(user_id: string, updateObject) {
         const updatedUserFromDB = await this.userModel.update({user_id}, updateObject);
         return new UserResponseDTO(updatedUserFromDB.user_id, updatedUserFromDB.user_name,
             updatedUserFromDB.email, updatedUserFromDB.avatar_img_url, updatedUserFromDB.last_login);
+    }
+
+    public async deleteUser(user_id: string) {
+        try {
+            return await this.userModel.delete({user_id});
+        } catch (error) {
+            throw new HttpException('Failed to delete user', HttpStatus.BAD_REQUEST);
+        }
     }
 
     private async validateUser(user_id: string, use_credentials: UserCredentialsDTO) {

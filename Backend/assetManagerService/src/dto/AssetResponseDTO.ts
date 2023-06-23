@@ -1,4 +1,4 @@
-export class AssetDTO {
+export class AssetResponseDTO {
     user_id: string;
     fund_id: string;
     amount: number;

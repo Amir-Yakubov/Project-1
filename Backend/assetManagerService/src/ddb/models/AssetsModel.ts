@@ -6,12 +6,13 @@ import { NODE_ENV } from "../../utils/Constans";
 
 export class AssetsPK {
   user_id: string;
+  fund_id: string;
 }
 
 const BlastOffRacesSchema = new Schema(
   {
     user_id: { type: String, hashKey: true },
-    fund_id: String,
+    fund_id: { type: String, rangeKey: true },
     amount: Number,
     entry_date: Number,
     maturity_date: Number
