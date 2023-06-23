@@ -11,12 +11,16 @@ export class AssetsPK {
 const BlastOffRacesSchema = new Schema(
   {
     user_id: { type: String, hashKey: true },
+    fund_id: String,
+    amount: Number,
+    entry_date: Number,
+    maturity_date: Number
   },
   schemaDefaultSetting
 );
 
 export const AssetsModelDefinition: ModelDefinition = {
-  name: TABLES.ASSETS,
+  name: TABLES.ASSET,
   schema: BlastOffRacesSchema,
   options: { create: NODE_ENV != "prod" && NODE_ENV != "dev" }
 };

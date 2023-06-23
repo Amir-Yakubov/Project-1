@@ -1,3 +1,3 @@
 export const TABLES = {
-  ASSETS: ''
+  ASSET: 'asset_dev'
 };
