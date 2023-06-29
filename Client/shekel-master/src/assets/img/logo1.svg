@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="159" height="160" viewBox="0 0 159 160">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 40px;
+        filter: url(#filter);
+        fill: #fff;
+        text-anchor: middle;
+        font-family: Poppins;
+        font-weight: 700;
+      }
+    </style>
+    <filter id="filter" x="4" y="37" width="153" height="73" filterUnits="userSpaceOnUse">
+      <feOffset result="offset" dy="5" in="SourceAlpha"/>
+      <feGaussianBlur result="blur" stdDeviation="1.732"/>
+      <feFlood result="flood" flood-opacity="0.2"/>
+      <feComposite result="composite" operator="in" in2="blur"/>
+      <feBlend result="blend" in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Artboard_1" data-name="Artboard 1">
+    <text id="Shekel_Master" data-name="Shekel Master" class="cls-1" x="80.5" y="70.5">Shekel<tspan x="80.5" dy="48">Master</tspan></text>
+  </g>
+</svg>

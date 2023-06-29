@@ -1,8 +1,20 @@
 // Setup
+@font-face {
+  font-family: Belanosima;
+  src: url(../fonts/Belanosima/Belanosima-Regular.ttf);
+}
+@font-face {
+  font-family: Rubik;
+  src: url(../fonts/Rubik/static/Rubik-Regular.ttf);
+}
+@font-face {
+  font-family: Ploni;
+  src: url(../fonts/Ploni/PloniRegular.woff);
+}
+
 @import "setup/variables";
 @import "setup/functions";
 @import "setup/mixins";
-@import "setup/typography";
 
 // Basics
 @import "basics/helpers";
@@ -23,6 +35,7 @@
 @import "cmps/app-footer";
 @import "cmps/user-msg";
 @import "cmps/shopping-cart";
+@import "cmps/side-nav";
 
 
 

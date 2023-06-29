@@ -1,19 +1,21 @@
 import React from 'react'
-import { Routes, Route } from 'react-router'
+import {Routes, Route} from 'react-router'
 import {HomePage} from "./pages/home-page";
-export function RootCmp() {
+import {SideNav} from "./cmps/side-nav";
+import {UserDetails} from "./cmps/user-details";
+import {Login} from "./cmps/login";
 
+export function RootCmp() {
     return (
         <div>
-            <main className='main-container'>
+            <main className={'main-container'}>
+                <SideNav />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="auth/login" element={<Login />} />
+                    <Route path="user/:id" element={<UserDetails />} />
                 </Routes>
             </main>
         </div>
     )
 }
-
-
-
-

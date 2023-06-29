@@ -1,0 +1,32 @@
+.side-nav {
+  background-color: mediumseagreen;
+  grid-area: navbar;
+  border-radius: 50px 15px 30px;
+  height: 97vh;
+  margin-top: 10px;
+  padding: 29px 7px;
+  font-family: ploni;
+  font-size: 1rem;
+  text-align: center;
+  align-items: center;
+
+  .side-nav-link {
+    padding-bottom: 20px;
+
+    &:hover {
+      color: white;
+      text-decoration: none;
+    }
+
+  }
+
+  .icon-link {
+    height: 24px;
+    width: 24px;
+    margin: 0 auto 2px auto;
+
+    &:active {
+      color: white;
+    }
+  }
+}

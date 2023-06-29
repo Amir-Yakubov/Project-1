@@ -1,7 +1,17 @@
+@font-face {
+  font-family: Belanosima;
+  src: url(../fonts/Belanosima/Belanosima-Regular.ttf);
+}
+@font-face {
+  font-family: Rubik;
+  src: url(../fonts/Rubik/static/Rubik-Regular.ttf);
+}
+@font-face {
+  font-family: Ploni;
+  src: url(../fonts/Ploni/PloniRegular.woff);
+}
 /* Breakpoint mixins */
 /* Media  Mixins */
-@font-face {}
-@font-face {}
 .fs12 {
   font-size: 0.75rem;
 }
@@ -114,28 +124,16 @@
 
 .main-container {
   display: grid;
-  grid-template-columns: 20px 1fr 20px;
+  grid-template-columns: 100px 1fr 100px 90px;
+  grid-template-areas: "space-left  main-body  space-right navbar";
+  transition: all 0.3s;
+  width: 100%;
 }
 .main-container > * {
   grid-column: 2;
 }
 .main-container > *.full {
   grid-column: 1/-1;
-}
-@media (min-width: 500px) {
-  .main-container {
-    grid-template-columns: minmax(20px, 1fr) minmax(auto, 460px) minmax(20px, 1fr);
-  }
-}
-@media (min-width: 760px) {
-  .main-container {
-    grid-template-columns: minmax(20px, 1fr) minmax(auto, 720px) minmax(20px, 1fr);
-  }
-}
-@media (min-width: 1340px) {
-  .main-container {
-    grid-template-columns: minmax(20px, 1fr) minmax(auto, 1300px) minmax(20px, 1fr);
-  }
 }
 
 .card-grid {
@@ -162,8 +160,7 @@ html {
 body {
   font-size: 1.125rem;
   margin: 0;
-  max-width: 1024px;
-  margin: auto;
+  margin: auto !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -174,10 +171,6 @@ h1, h2, h3, h4, h5, h6 {
 
 section, main, footer {
   padding: 5px;
-}
-
-img {
-  width: 100%;
 }
 
 p {
@@ -392,6 +385,34 @@ form > * {
 
 .cart li button {
   margin: 5px;
+}
+
+.side-nav {
+  background-color: mediumseagreen;
+  grid-area: navbar;
+  border-radius: 50px 15px 30px;
+  height: 97vh;
+  margin-top: 10px;
+  padding: 29px 7px;
+  font-family: ploni;
+  font-size: 1rem;
+  text-align: center;
+  align-items: center;
+}
+.side-nav .side-nav-link {
+  padding-bottom: 20px;
+}
+.side-nav .side-nav-link:hover {
+  color: white;
+  text-decoration: none;
+}
+.side-nav .icon-link {
+  height: 24px;
+  width: 24px;
+  margin: 0 auto 2px auto;
+}
+.side-nav .icon-link:active {
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */
