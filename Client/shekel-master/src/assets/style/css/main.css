@@ -136,19 +136,20 @@
 }
 
 .main-container {
+  background-color: rgba(45, 144, 89, 0.08);
   display: grid;
-  grid-template-columns: 100px 1fr 100px 90px;
+  grid-template-columns: 300px 1fr 300px 70px;
   grid-template-areas: "space-left  main-body  space-right navbar";
   transition: all 0.3s;
   width: 100%;
 }
 
 .main-container > * {
-  grid-column: 2;
+  grid-area: main-body;
 }
 
 .main-container > *.full {
-  grid-column: 1/-1;
+  grid-area: space-left/space-right;
 }
 
 .card-grid {
@@ -170,6 +171,7 @@ html {
   font-family: montserrat;
   line-height: 1.6;
   color: #4f3a65;
+  lang: he;
 }
 
 body {
@@ -179,7 +181,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: caveat;
+  font-family: Ploni;
   margin: 0 0 0.6em;
   line-height: 1;
 }
@@ -263,6 +265,96 @@ form > * {
   color: whitesmoke;
   padding: 5px;
   margin: 3px;
+}
+
+.home-page {
+  margin-block-start: 10px;
+  text-align: right;
+  font-family: Ploni;
+}
+
+.home-page h1 {
+  font-family: Ploni;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.home-page h2 {
+  font-family: Ploni;
+  padding: 45px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.home-page p {
+  padding: 45px;
+}
+
+.home-page button {
+  border-radius: 0.9rem !important;
+  margin: 0 2px !important;
+}
+
+.home-page input {
+  border-radius: 0.9rem !important;
+  margin: 0 2px !important;
+}
+
+.home-page input::placeholder {
+  color: grey !important;
+  opacity: 0.7 !important;
+}
+
+.home-page .frame {
+  background-color: white;
+  border-radius: 0.99rem;
+  border: rgba(60, 179, 113, 0.4117647059) 1px solid;
+  margin: 15px auto;
+}
+
+.home-page .cards-wrapper {
+  align-items: center;
+  justify-content: center;
+}
+
+.home-page .card {
+  border-radius: 0.9rem;
+  width: 16%;
+  font-family: Ploni;
+  text-align: center;
+  vert-align: middle;
+  border: rgba(60, 179, 113, 0.4117647059) 1px solid;
+  transition: all 0.7s;
+  cursor: pointer;
+  margin: 0 3px;
+}
+
+.home-page .card:hover {
+  background-color: mediumseagreen;
+  color: white;
+}
+
+.home-page .card h5 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.home-page .main-search-input {
+  width: 75.5%;
+  margin: 15px auto;
+}
+
+.home-page .main-search-input .dropdown-toggle .btn {
+  border-radius: 0.9rem;
+}
+
+.home-page .funds-container h4 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.home-page .funds-container .funds-performance {
+  flex-wrap: wrap;
 }
 
 .car-list {
@@ -417,35 +509,158 @@ form > * {
 }
 
 .side-nav {
-  background-color: mediumseagreen;
+  position: fixed;
+  right: 0;
+  width: 70px;
   grid-area: navbar;
+  background: #033841;
   border-radius: 50px 15px 30px;
   height: 97vh;
   margin-top: 10px;
   padding: 29px 7px;
   font-family: ploni;
-  font-size: 1rem;
+  font-size: 0.8rem;
   text-align: center;
   align-items: center;
+  transition: all 0.3s;
 }
 
 .side-nav .side-nav-link {
   padding-bottom: 20px;
+  color: white;
 }
 
 .side-nav .side-nav-link:hover {
-  color: white;
   text-decoration: none;
+  color: mediumseagreen;
+}
+
+.side-nav .icon {
+  background-size: cover;
+  height: 24px;
+  width: 24px;
+  margin: 3px auto;
+}
+
+.side-nav .icon.cash {
+  background: url("../../img/white/cash.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.cash:hover {
+  background: url("../../img/green/cash.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.box-arrow-in-right {
+  background: url("../../img/white/box-arrow-in-right.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.box-arrow-in-right:hover {
+  background: url("../../img/green/box-arrow-in-right.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.chart {
+  background: url("../../img/white/chart.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.chart:hover {
+  background: url("../../img/green/chart.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.chart-up {
+  background: url("../../img/white/chart-up.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.chart-up:hover {
+  background: url("../../img/green/chart-up.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.coins-up {
+  background: url("../../img/white/coins-up.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.coins-up:hover {
+  background: url("../../img/green/coins-up.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.doc {
+  background: url("../../img/white/doc.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.doc:hover {
+  background: url("../../img/green/doc.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.wallet {
+  background: url("../../img/white/wallet.svg") no-repeat center;
+  background-size: cover;
+}
+
+.side-nav .icon.wallet:hover {
+  background: url("../../img/green/wallet.svg") no-repeat center;
+  background-size: cover;
 }
 
 .side-nav .icon-link {
+  margin: 0 auto 2px auto;
   height: 24px;
   width: 24px;
-  margin: 0 auto 2px auto;
+}
+
+.side-nav .icon-link::selection {
+  color: mediumseagreen;
 }
 
 .side-nav .icon-link:active {
   color: white;
+}
+
+.side-nav .logo {
+  height: 55px;
+  margin-block-end: -15px;
+}
+
+.side-nav .main-title {
+  font-family: Ploni;
+  margin-top: 4px !important;
+  font-weight: 500;
+  color: mediumseagreen;
+}
+
+table {
+  font-family: "Assistant";
+  font-size: 0.8rem;
+  margin: 15px auto;
+  max-width: 30%;
+  border-radius: 0.9rem !important;
+  overflow: hidden !important;
+  border: transparent !important;
+}
+
+h4 {
+  text-decoration: underline;
+}
+
+h5, h6 {
+  text-align: center;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+a {
+  display: block;
+  text-align: center;
 }
 
 

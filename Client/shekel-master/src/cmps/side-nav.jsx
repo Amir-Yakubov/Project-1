@@ -1,52 +1,46 @@
 import {NavLink} from "react-bootstrap";
 import React from "react";
-import {default as boxArrowInRightIcon} from '../assets/img/box-arrow-in-right.svg'
-import {default as chartUpIcon} from '../assets/img/chart-up.svg'
-import {default as chartIcon} from '../assets/img/chart.svg'
-import {default as walletIcon} from '../assets/img/wallet.svg'
-import {default as docIcon} from '../assets/img/doc.svg'
-import {default as cash} from '../assets/img/cash.svg'
-import {default as coinsUpIcon} from '../assets/img/coins-up.svg'
-import {default as logo} from '../assets/img/logo4.png'
+import {default as chartUpIcon} from '../assets/img/white/chart-up.svg'
+import {default as chartIcon} from '../assets/img/white/chart.svg'
+import {default as walletIcon} from '../assets/img/white/wallet.svg'
+import {default as docIcon} from '../assets/img/white/doc.svg'
+import {default as cash} from '../assets/img/white/cash.svg'
+import {default as coinsUpIcon} from '../assets/img/white/coins-up.svg'
 
 export function SideNav() {
     return <nav className='side-nav'>
         <NavLink to="/" className='side-nav-link'>
-            <img className="logo" src={logo} alt='logo'/>
+            <h6 className='main-title'>Shekel<br />Master</h6>
         </NavLink>
         <NavLink to="auth/login" className='side-nav-link'>
-            <img className="icon-link" src={boxArrowInRightIcon} alt='icon'/>
-            <br/>
+            <div className='icon box-arrow-in-right'></div>
             איזור אישי
         </NavLink>
         <NavLink to="#child-fund" className='side-nav-link'>
-            <img className="icon-link" src={chartUpIcon} alt='icon'/>
-            <br/>
-            חסכון לכל ילד
+            <div className='icon chart-up'></div>
+            חסכון
+            <br />
+            לכל ילד
         </NavLink>
         <NavLink to="#fund/gemel" className='side-nav-link'>
-            <img className="icon-link" src={walletIcon} alt='icon'/>
-            <br/>
+            <div className='icon wallet'></div>
             גמל להשקעה
         </NavLink>
         <NavLink to="#fund/heshtalmot" className='side-nav-link'>
-            <img className="icon-link" src={docIcon} alt='icon'/>
-            <br/>
-            קרן השתלמות
+            <div className='icon doc'></div>
+            קרנות השתלמות
         </NavLink>
         <NavLink to="#fund/pension" className='side-nav-link'>
-            <img className="icon-link" src={cash} alt='icon'/>
-            <br/>
-            קרן פנסיה
+            <div className='icon cash'></div>
+            קרנות פנסיה
         </NavLink>
         <NavLink to="#fund/savings" className='side-nav-link'>
-            <img className="icon-link" src={coinsUpIcon} alt='icon'/>
-            <br/>
-            חסכון פרט
+            <div className='icon coins-up'></div>
+            פוליסות חסכון
         </NavLink>
         <NavLink to="#fund/gemel2" className='side-nav-link'>
-            <img className="icon-link" src={chartIcon} alt='icon'/>
-            <br/>קופת גמל
+            <div className='icon chart'></div>
+            קופות<br />גמל
         </NavLink>
     </nav>
 }

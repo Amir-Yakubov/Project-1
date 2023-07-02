@@ -1,0 +1,97 @@
+.home-page {
+  margin-block-start: 10px;
+  text-align: right;
+  font-family: Ploni;
+
+  h1{
+    font-family: Ploni;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  h2{
+    //font-weight: bold;
+    font-family: Ploni;
+    padding: 45px;
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  p{
+    padding: 45px;
+  }
+
+  button {
+    border-radius: 0.9rem !important;
+    margin: 0 2px !important;
+  }
+
+  input {
+    border-radius: 0.9rem !important;
+    margin: 0 2px !important;
+
+    &::placeholder {
+      color: grey !important;
+      opacity: 0.7 !important;
+    }
+  }
+
+  .frame {
+    background-color: white;
+    border-radius: 0.99rem;
+    border: #3cb37169 1px solid;
+    margin: 15px auto;
+  }
+
+  .cards-wrapper{
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .card {
+    border-radius: 0.9rem;
+    width: 16%;
+    font-family: Ploni;
+    text-align: center;
+    vert-align: middle;
+    border: #3cb37169 1px solid;
+    transition: all 0.7s;
+    cursor: pointer;
+    margin: 0 3px;
+
+    &:hover {
+      background-color: mediumseagreen;
+      color: white;
+    }
+
+    h5{
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+
+  .main-search-input{
+    width: 75.5%;
+    margin: 15px auto;
+
+    .dropdown-toggle{
+
+      .btn{
+        border-radius: 0.9rem;
+      }
+    }
+  }
+
+  .funds-container{
+    h4{
+      text-align: center;
+      margin-top: 30px;
+    }
+
+  .funds-performance{
+    flex-wrap: wrap;
+  }
+  }
+
+}

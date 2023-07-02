@@ -1,32 +1,131 @@
 .side-nav {
-  background-color: mediumseagreen;
+  position: fixed;
+  right: 0;
+  width: 70px;
   grid-area: navbar;
+  background: #033841;
   border-radius: 50px 15px 30px;
   height: 97vh;
   margin-top: 10px;
   padding: 29px 7px;
   font-family: ploni;
-  font-size: 1rem;
+  font-size: 0.8rem;
   text-align: center;
   align-items: center;
+  transition: all 0.3s;
 
   .side-nav-link {
     padding-bottom: 20px;
+    color: white;
 
     &:hover {
-      color: white;
       text-decoration: none;
+      color: mediumseagreen;
     }
 
   }
 
-  .icon-link {
+  .icon {
+    background-size: cover;
     height: 24px;
     width: 24px;
+    margin: 3px auto;
+
+    &.cash {
+      background: url("../../img/white/cash.svg") no-repeat center;
+      background-size: cover;
+
+      &:hover {
+        background: url("../../img/green/cash.svg") no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.box-arrow-in-right {
+      background: url("../../img/white/box-arrow-in-right.svg") no-repeat center;
+      background-size: cover;
+
+      &:hover {
+        background: url("../../img/green/box-arrow-in-right.svg") no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.chart {
+      background: url("../../img/white/chart.svg") no-repeat center;
+      background-size: cover;
+
+      &:hover {
+        background: url("../../img/green/chart.svg") no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.chart-up {
+      background: url("../../img/white/chart-up.svg") no-repeat center;
+      background-size: cover;
+
+      &:hover {
+        background: url("../../img/green/chart-up.svg") no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.coins-up {
+      background: url("../../img/white/coins-up.svg") no-repeat center;
+      background-size: cover;
+
+      &:hover {
+        background: url("../../img/green/coins-up.svg") no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.doc {
+      background: url("../../img/white/doc.svg") no-repeat center;
+      background-size: cover;
+
+      &:hover {
+        background: url("../../img/green/doc.svg") no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.wallet {
+      background: url("../../img/white/wallet.svg") no-repeat center;
+      background-size: cover;
+
+      &:hover {
+        background: url("../../img/green/wallet.svg") no-repeat center;
+        background-size: cover;
+      }
+    }
+  }
+
+  .icon-link {
     margin: 0 auto 2px auto;
+    height: 24px;
+    width: 24px;
+
+    &::selection{
+      color: mediumseagreen;
+    }
+
 
     &:active {
       color: white;
     }
+  }
+
+  .logo {
+    height: 55px;
+    margin-block-end: -15px;
+  }
+
+  .main-title {
+    font-family: Ploni;
+    margin-top: 4px !important;
+    font-weight: 500;
+    color: mediumseagreen;
   }
 }

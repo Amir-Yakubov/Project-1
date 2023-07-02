@@ -1,15 +1,16 @@
 .main-container {
+    background-color: rgba(45, 144, 89, 0.08);
     display: grid;
-    grid-template-columns: 100px 1fr 100px 90px;
+    grid-template-columns: 300px 1fr 300px 70px;
     grid-template-areas:
         "space-left  main-body  space-right navbar";
     transition: all 0.3s;
     width: 100%;
     > * {
-        grid-column: 2;
+        grid-area: main-body;
 
         &.full {
-            grid-column: 1 /-1;
+            grid-area: space-left / space-right;
         }
     }
     //
