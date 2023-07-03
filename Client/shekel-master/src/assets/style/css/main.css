@@ -13,31 +13,31 @@
 /* Breakpoint mixins */
 /* Media  Mixins */
 .fs12 {
-  font-size: 0.75rem;
+  font-size: rem(12px);
 }
 
 .fs14 {
-  font-size: 0.875rem;
+  font-size: rem(14px);
 }
 
 .fs18 {
-  font-size: 1.125rem;
+  font-size: rem(18px);
 }
 
 .fs20 {
-  font-size: 1.25rem;
+  font-size: rem(20px);
 }
 
 .fs24 {
-  font-size: 1.5rem;
+  font-size: rem(24px);
 }
 
 .fs28 {
-  font-size: 1.75rem;
+  font-size: rem(28px);
 }
 
 .fs30 {
-  font-size: 1.875rem;
+  font-size: rem(30px);
 }
 
 .flex {
@@ -163,7 +163,7 @@
 }
 
 ::selection {
-  background-color: #ce2e6c;
+  background-color: mediumseagreen;
   color: #fff;
 }
 
@@ -175,8 +175,7 @@ html {
 }
 
 body {
-  font-size: 1.125rem;
-  margin: 0;
+  font-size: rem(18px);
   margin: auto !important;
 }
 
@@ -192,14 +191,6 @@ section, main, footer {
 
 p {
   margin: 0 0 1em;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 button {
@@ -276,14 +267,15 @@ form > * {
 .home-page h1 {
   font-family: Ploni;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 5rem;
+  text-align: center;
+  color: white;
 }
 
 .home-page h2 {
-  font-family: Ploni;
-  padding: 45px;
+  font-weight: bold;
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.8rem;
 }
 
 .home-page p {
@@ -305,11 +297,21 @@ form > * {
   opacity: 0.7 !important;
 }
 
+.home-page .cover {
+  padding: 45px;
+}
+
+.home-page .main-intro {
+  background: #033841;
+  border-radius: 4% 8% 4% 8%/68px;
+}
+
 .home-page .frame {
   background-color: white;
   border-radius: 0.99rem;
   border: rgba(60, 179, 113, 0.4117647059) 1px solid;
   margin: 15px auto;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .home-page .cards-wrapper {
@@ -327,6 +329,7 @@ form > * {
   transition: all 0.7s;
   cursor: pointer;
   margin: 0 3px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .home-page .card:hover {
@@ -351,34 +354,11 @@ form > * {
 .home-page .funds-container h4 {
   text-align: center;
   margin-top: 30px;
+  font-size: 2rem;
 }
 
 .home-page .funds-container .funds-performance {
   flex-wrap: wrap;
-}
-
-.car-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.car-list li {
-  background-color: #4f3a65;
-  color: #fff;
-  padding: 5px;
-  margin: 5px;
-}
-
-.car-list a {
-  color: #ce2e6c;
-  padding: 10px;
-}
-
-.car-list h3 {
-  background-color: #ddd;
-  padding: 10px 5px;
-  margin: 5px;
 }
 
 .review-list {
@@ -409,55 +389,6 @@ form > * {
   height: 200px;
   width: 200px;
   background-size: contain;
-}
-
-.app-header {
-  background-color: #95adbe;
-  padding: 10px;
-}
-
-.app-header .user-info {
-  padding-left: 100px;
-  color: #ce2e6c;
-}
-
-.app-header .user-info .score {
-  background-color: #4f3a65;
-  color: #fff;
-  padding: 8px;
-  margin: 10px;
-  border-radius: 50%;
-}
-
-.app-header .user-info img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.app-header .user-info .btn-link {
-  color: #4f3a65;
-}
-
-.app-header nav {
-  font-size: 0.8em;
-  background-color: #dff0ea;
-  padding: 5px;
-}
-
-.app-header nav a:first-child {
-  margin-right: 30px;
-}
-
-.app-header nav a:not(:first-child) {
-  border-top: 1px solid #ce2e6c;
-  padding: 0 5px;
-  margin: 10px;
-}
-
-.app-header nav .active {
-  color: #ce2e6c;
 }
 
 .app-footer {
@@ -519,10 +450,14 @@ form > * {
   margin-top: 10px;
   padding: 29px 7px;
   font-family: ploni;
-  font-size: 0.8rem;
+  font-size: 1rem;
   text-align: center;
   align-items: center;
   transition: all 0.3s;
+}
+
+.side-nav .nav-link:focus, .side-nav .nav-link:hover {
+  color: mediumseagreen;
 }
 
 .side-nav .side-nav-link {

@@ -5,7 +5,6 @@ import React from "react";
 export function FundRecapCards() {
     return (
         <section className='fund-cards'>
-            <h2>מערכת להשוואת ביצועים</h2>
             <div className='cards-wrapper flex'>
                 <div className="card">
                     <div className="card-body">

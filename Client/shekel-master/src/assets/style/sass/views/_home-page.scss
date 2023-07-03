@@ -6,15 +6,15 @@
   h1{
     font-family: Ploni;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 5rem;
+    text-align: center;
+    color: white;
   }
 
   h2{
-    //font-weight: bold;
-    font-family: Ploni;
-    padding: 45px;
+    font-weight: bold;
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.8rem;
   }
 
   p{
@@ -36,11 +36,21 @@
     }
   }
 
+  .cover {
+    padding: 45px;
+  }
+
+  .main-intro {
+    background: #033841;
+    border-radius: 4% 8% 4% 8% / 68px;
+  }
+
   .frame {
     background-color: white;
     border-radius: 0.99rem;
     border: #3cb37169 1px solid;
     margin: 15px auto;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   }
 
   .cards-wrapper{
@@ -59,6 +69,7 @@
     transition: all 0.7s;
     cursor: pointer;
     margin: 0 3px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
 
     &:hover {
       background-color: mediumseagreen;
@@ -87,6 +98,7 @@
     h4{
       text-align: center;
       margin-top: 30px;
+      font-size: 2rem;
     }
 
   .funds-performance{

@@ -3,7 +3,7 @@
 }
 
 ::selection {
-    background-color: $clr1;
+    background-color: $clr8;
     color: $clr6;
 }
 
@@ -16,7 +16,6 @@ html {
 
 body {
     font-size: rem(18px);
-    margin: 0;
     margin: auto!important;
 }
 
@@ -37,12 +36,5 @@ img {
 
 p {
     margin: 0 0 1em;
-}
-
-a {
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
 }
 
