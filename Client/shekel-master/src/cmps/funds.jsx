@@ -1,42 +1,20 @@
 import {FundTables} from "./fund-tables";
 import React from "react";
 
-export function Funds() {
+export function Funds({funds}) {
+    const sectors = ['חסכון לכל ילד', 'גמל להשקעה', 'קרנות השתלמות', 'קרנות פנסיה', 'פוליסות חסכון', 'קופות גמל'];
     return (
         <>
-            <h4>חסכון לכל ילד</h4>
-            <div className='funds-performance flex'>
-                <FundTables/>
-            </div>
-            <hr/>
-            <h4>גמל להשקעה</h4>
-            <div className='funds-performance flex'>
-                <FundTables/>
-            </div>
-
-            <hr/>
-            <h4>קרנות השתלמות</h4>
-            <div className='funds-performance flex'>
-                <FundTables/>
-            </div>
-
-            <hr/>
-            <h4>קרנות פנסיה</h4>
-            <div className='funds-performance flex'>
-                <FundTables/>
-            </div>
-
-            <hr/>
-            <h4>פוליסות חסכון</h4>
-            <div className='funds-performance flex'>
-                <FundTables/>
-            </div>
-
-            <hr/>
-            <h4>קופות גמל</h4>
-            <div className='funds-performance flex'>
-                <FundTables/>
-            </div>
+            {funds.map((fund, i) => {
+                return (
+                    <>
+                        <h4 className={`title-${i}`}>{sectors[i]}</h4>
+                        <div className='funds-performance flex'>
+                            {(funds[i] && funds[i].length > 0) && <FundTables funds={funds[i]}/>}
+                        </div>
+                    </>
+                )
+            })}
         </>
     )
 

@@ -305,8 +305,15 @@ form > * {
   margin: 0 3px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
+.home-page .card a {
+  color: black;
+  text-decoration: none;
+}
 .home-page .card:hover {
   background-color: mediumseagreen;
+  color: white;
+}
+.home-page .card:hover a {
   color: white;
 }
 .home-page .card h5 {
@@ -388,20 +395,6 @@ form > * {
 
 .user-msg.error {
   background-color: rgb(216, 59, 59);
-}
-
-.cart {
-  color: black;
-  background-color: #dff0ea;
-  padding: 20px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  text-align: left;
-}
-
-.cart li button {
-  margin: 5px;
 }
 
 .side-nav {
@@ -519,10 +512,16 @@ table {
   font-family: "Assistant";
   font-size: 0.8rem;
   margin: 15px auto;
-  max-width: 30%;
+  max-width: 31.5%;
   border-radius: 0.9rem !important;
   overflow: hidden !important;
   border: transparent !important;
+  text-align: center;
+  vertical-align: middle;
+}
+table td {
+  text-align: center;
+  vertical-align: middle;
 }
 
 h4 {

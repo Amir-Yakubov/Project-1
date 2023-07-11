@@ -2,23 +2,30 @@ table {
   font-family: "Assistant";
   font-size: 0.8rem;
   margin: 15px auto;
-  max-width: 30%;
+  max-width: 31.5%;
   border-radius: 0.9rem !important;
   overflow: hidden !important;
   border: transparent !important;
+  text-align: center;
+  vertical-align: middle;
+
+  td{
+    text-align: center;
+    vertical-align: middle;
+  }
 }
 
-h4{
+h4 {
   text-decoration: underline;
 }
 
-h5, h6{
+h5, h6 {
   text-align: center;
   margin: 0 !important;
   padding: 0 !important;
 }
 
-a{
+a {
   display: block;
   text-align: center;
 }

@@ -1,5 +1,5 @@
 import {Controller, Get, Param} from '@nestjs/common';
-import { ProvidenFundService } from "../services/providenFundService";
+import { ProvidentFundService } from "../services/provident-fund.service";
 import {FUND_CLASSIFICATION_ENUM} from "../Enum/FUND_CLASSIFICATION_ENUM";
 import {SUB_SPECIALIZATION_ENUM} from "../Enum/SUB_SPECIALIZATION_ENUM";
 import {PensionService} from "../services/pensionService";
@@ -8,7 +8,7 @@ import {InsuranceService} from "../services/insuranceService";
 @Controller('fund_service/')
 export class FundController {
   constructor(
-      private providenFundService: ProvidenFundService,
+      private providenFundService: ProvidentFundService,
       private pensionService: PensionService,
       private insuranceService: InsuranceService
   ) {}

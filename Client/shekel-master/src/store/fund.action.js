@@ -7,20 +7,44 @@ import {fundService} from "../services/fund.service";
 export async function loadFunds() {
     store.dispatch({type: LOADING_START})
     try {
-        const childrenStockFunds = await fundService.getChildrenFundBySpecialization('סיכון מוגבר')
-        console.log('childrenStockFunds', childrenStockFunds)
-        const childrenGeneralFunds = await fundService.getChildrenFundBySpecialization('סיכון בינוני')
-        console.log('childrenGeneralFunds', childrenGeneralFunds)
-        const childrenBondFunds = await fundService.getChildrenFundBySpecialization('סיכון מועט')
-        console.log('childrenBondFunds', childrenBondFunds)
-        const funds = [childrenStockFunds, childrenGeneralFunds, childrenBondFunds]
-        console.log('funds', funds)
-        store.dispatch({type: SET_FUNDS, funds})
+        const childrenStockFunds = await fundService.getChildrenFundBySpecialization('סיכון מוגבר');
+        const childrenGeneralFunds = await fundService.getChildrenFundBySpecialization('סיכון בינוני');
+        const childrenBondFunds = await fundService.getChildrenFundBySpecialization('סיכון מועט');
+        const childrenFunds = [childrenStockFunds, childrenGeneralFunds, childrenBondFunds];
+
+        const providentForInvestmentStockFunds = await fundService.getProvidentFundForInvestmentSpecialization('מניות');
+        const providentForInvestmentGeneralFunds = await fundService.getProvidentFundForInvestmentSpecialization('כללי');
+        const providentForInvestmentBondFunds = await fundService.getProvidentFundForInvestmentSpecialization('אג"ח');
+        const providentForInvestmentFunds = [providentForInvestmentStockFunds, providentForInvestmentGeneralFunds, providentForInvestmentBondFunds];
+
+        const educationStockFunds = await fundService.getEducationFundBySpecialization('מניות');
+        const educationGeneralFunds = await fundService.getEducationFundBySpecialization('כללי');
+        const educationBondFunds = await fundService.getEducationFundBySpecialization('אג"ח');
+        const educationFunds = [educationStockFunds, educationGeneralFunds, educationBondFunds];
+
+        const pensionStockFunds = await fundService.getPensionFundBySpecialization('מניות');
+        const pensionGeneralFunds = await fundService.getPensionFundBySpecialization('כללי');
+        const pensionBondFunds = await fundService.getPensionFundBySpecialization('אג"ח');
+        const pensionFunds = [pensionStockFunds, pensionGeneralFunds, pensionBondFunds];
+
+        const savingsPolicyStockFunds = await fundService.getSavingsPolicyBySpecialization('מניות');
+        const savingsPolicyGeneralFunds = await fundService.getSavingsPolicyBySpecialization('כללי');
+        const savingsPolicyBondFunds = await fundService.getSavingsPolicyBySpecialization('אג"ח');
+        const savingsPolicyFunds = [savingsPolicyStockFunds, savingsPolicyGeneralFunds, savingsPolicyBondFunds];
+
+        const providentStockFunds = await fundService.getProvidentFundBySpecialization('מניות');
+        const providentGeneralFunds = await fundService.getProvidentFundBySpecialization('כללי');
+        const providentBondFunds = await fundService.getProvidentFundBySpecialization('אג"ח');
+        const providentFunds = [providentStockFunds, providentGeneralFunds, providentBondFunds];
+
+        const funds = [childrenFunds, providentForInvestmentFunds, educationFunds, pensionFunds, savingsPolicyFunds, providentFunds];
+
+        store.dispatch({type: SET_FUNDS, funds: funds});
     } catch (err) {
-        console.log('Had issues loading funds', err)
-        throw err
+        console.log('Had issues loading funds', err);
+        throw err;
     } finally {
-        store.dispatch({type: LOADING_DONE})
+        store.dispatch({type: LOADING_DONE});
     }
 }
 
