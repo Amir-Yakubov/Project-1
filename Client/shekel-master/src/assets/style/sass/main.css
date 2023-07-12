@@ -254,6 +254,7 @@ form > * {
   font-size: 5rem;
   text-align: center;
   color: white;
+  cursor: pointer;
 }
 .home-page h2 {
   font-weight: bold;
@@ -424,6 +425,34 @@ form > * {
   text-decoration: none;
   color: mediumseagreen;
 }
+.side-nav .side-nav-link:hover .cash {
+  background: url("../../img/green/cash.svg") no-repeat center;
+  background-size: cover;
+}
+.side-nav .side-nav-link:hover .box-arrow-in-right {
+  background: url("../../img/green/box-arrow-in-right.svg") no-repeat center;
+  background-size: cover;
+}
+.side-nav .side-nav-link:hover .chart {
+  background: url("../../img/green/chart.svg") no-repeat center;
+  background-size: cover;
+}
+.side-nav .side-nav-link:hover .chart-up {
+  background: url("../../img/green/chart-up.svg") no-repeat center;
+  background-size: cover;
+}
+.side-nav .side-nav-link:hover .coins-up {
+  background: url("../../img/green/coins-up.svg") no-repeat center;
+  background-size: cover;
+}
+.side-nav .side-nav-link:hover .doc {
+  background: url("../../img/green/doc.svg") no-repeat center;
+  background-size: cover;
+}
+.side-nav .side-nav-link:hover .wallet {
+  background: url("../../img/green/wallet.svg") no-repeat center;
+  background-size: cover;
+}
 .side-nav .icon {
   background-size: cover;
   height: 24px;
@@ -434,56 +463,28 @@ form > * {
   background: url("../../img/white/cash.svg") no-repeat center;
   background-size: cover;
 }
-.side-nav .icon.cash:hover {
-  background: url("../../img/green/cash.svg") no-repeat center;
-  background-size: cover;
-}
 .side-nav .icon.box-arrow-in-right {
   background: url("../../img/white/box-arrow-in-right.svg") no-repeat center;
-  background-size: cover;
-}
-.side-nav .icon.box-arrow-in-right:hover {
-  background: url("../../img/green/box-arrow-in-right.svg") no-repeat center;
   background-size: cover;
 }
 .side-nav .icon.chart {
   background: url("../../img/white/chart.svg") no-repeat center;
   background-size: cover;
 }
-.side-nav .icon.chart:hover {
-  background: url("../../img/green/chart.svg") no-repeat center;
-  background-size: cover;
-}
 .side-nav .icon.chart-up {
   background: url("../../img/white/chart-up.svg") no-repeat center;
-  background-size: cover;
-}
-.side-nav .icon.chart-up:hover {
-  background: url("../../img/green/chart-up.svg") no-repeat center;
   background-size: cover;
 }
 .side-nav .icon.coins-up {
   background: url("../../img/white/coins-up.svg") no-repeat center;
   background-size: cover;
 }
-.side-nav .icon.coins-up:hover {
-  background: url("../../img/green/coins-up.svg") no-repeat center;
-  background-size: cover;
-}
 .side-nav .icon.doc {
   background: url("../../img/white/doc.svg") no-repeat center;
   background-size: cover;
 }
-.side-nav .icon.doc:hover {
-  background: url("../../img/green/doc.svg") no-repeat center;
-  background-size: cover;
-}
 .side-nav .icon.wallet {
   background: url("../../img/white/wallet.svg") no-repeat center;
-  background-size: cover;
-}
-.side-nav .icon.wallet:hover {
-  background: url("../../img/green/wallet.svg") no-repeat center;
   background-size: cover;
 }
 .side-nav .icon-link {

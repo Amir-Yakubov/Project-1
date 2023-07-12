@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {SearchInput} from "../cmps/search-input";
 import {FundRecapCards} from "../cmps/fund-recap-cards";
 import {Funds} from "../cmps/funds";
@@ -6,7 +6,6 @@ import {Cover} from "../cmps/cover";
 import {AppHeader} from "../cmps/app.header";
 import {loadFunds} from "../store/fund.action";
 import {useSelector} from "react-redux";
-import {Route, Routes} from "react-router";
 import {FundsMain} from "../cmps/funds-main";
 import {ChildrenFunds} from "../cmps/funds-speciality/children-funds";
 import {ProvidentForInvestmentFunds} from "../cmps/funds-speciality/provident-for-investment-funds";
@@ -17,6 +16,7 @@ import {EducationFunds} from "../cmps/funds-speciality/education-funds";
 
 export function HomePage() {
     const {funds} = useSelector((storeState) => storeState.fundModule);
+    const [activeTab, setActiveTab] = useState('funds');
 
     useEffect(() => {
         onLoadFunds()
@@ -36,14 +36,21 @@ export function HomePage() {
     console.log('Funds', funds);
     return (
         <section className='home-page'>
-            <AppHeader/>
+            <AppHeader setActiveTab={setActiveTab}/>
             <div className='main-content frame'>
                 <Cover/>
-                <FundRecapCards/>
+                <FundRecapCards setActiveTab={setActiveTab}/>
                 <SearchInput/>
             </div>
 
-            <FundsMain funds={funds}/>
+            {activeTab === 'funds' && <FundsMain funds={funds}/>}
+            {activeTab === 'childrenFunds' && <ChildrenFunds childrenFunds={funds[0]}/>}
+            {activeTab === 'providentForInvestmentFunds' &&
+                <ProvidentForInvestmentFunds providentForInvestmentFunds={funds[1]}/>}
+            {activeTab === 'educationFunds' && <EducationFunds educationFunds={funds[2]}/>}
+            {activeTab === 'pensionFunds' && <PensionFunds pensionFunds={funds[3]}/>}
+            {activeTab === 'savingsPolicyFunds' && <SavingsPolicyFunds savingsPolicyFunds={funds[4]}/>}
+            {activeTab === 'providentFunds' && <ProvidentFunds providentFunds={funds[5]}/>}
         </section>
     )
 }
