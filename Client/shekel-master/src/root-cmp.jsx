@@ -11,9 +11,9 @@ export function RootCmp() {
             <main className={'main-container'}>
                 <SideNav/>
                 <Routes>
-                    <Route path="/" element={<HomePage/>} />
-                    <Route path="auth/login" element={<Login/>}/>
-                    <Route path="user/:id" element={<UserDetails/>}/>
+                    <Route path="/" element={<HomePage/>} key={'homePage'}/>
+                    <Route path="auth/login" element={<Login/>} key={'login'}/>
+                    <Route path="user/:id" element={<UserDetails/>} key={'userDetails'}/>
                 </Routes>
             </main>
         </div>

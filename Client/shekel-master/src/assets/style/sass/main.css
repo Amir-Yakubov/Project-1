@@ -170,12 +170,28 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 
+input {
+  text-align: right;
+}
+
 section, main, footer {
   padding: 5px;
 }
 
 p {
   margin: 0 0 1em;
+}
+
+.loader {
+  height: 100px;
+  position: absolute;
+  top: 70%;
+  left: 48.3%;
+  transform: translate(-50%, -50%);
+}
+
+.loader-wrap {
+  height: 100vh;
 }
 
 button {
@@ -188,9 +204,7 @@ button {
 }
 
 form > * {
-  display: block;
-  width: 200px;
-  margin: 10px 0px;
+  text-align: right;
 }
 
 .btn-link {
@@ -364,6 +378,12 @@ form > * {
   background-size: contain;
 }
 
+.login-signup {
+  text-align: right;
+  height: 98.9vh;
+  margin-top: 100px;
+}
+
 .app-footer {
   background-color: #111;
   color: #95adbe;
@@ -416,6 +436,11 @@ form > * {
 }
 .side-nav .nav-link:focus, .side-nav .nav-link:hover {
   color: mediumseagreen;
+}
+.side-nav a {
+  display: block;
+  text-align: center;
+  color: #033841;
 }
 .side-nav .side-nav-link {
   padding-bottom: 20px;
@@ -507,6 +532,7 @@ form > * {
   margin-top: 4px !important;
   font-weight: 500;
   color: mediumseagreen;
+  font-size: 1.19rem;
 }
 
 table {
@@ -519,6 +545,11 @@ table {
   border: transparent !important;
   text-align: center;
   vertical-align: middle;
+}
+table a {
+  display: block;
+  text-align: center;
+  color: #3cb371;
 }
 table td {
   text-align: center;
@@ -535,9 +566,19 @@ h5, h6 {
   padding: 0 !important;
 }
 
-a {
-  display: block;
-  text-align: center;
+.calculator h2 {
+  margin-block-start: 30px;
+}
+.calculator button {
+  margin-block-start: 10px !important;
+  margin-block-end: 20px !important;
+}
+.calculator input {
+  margin-block-end: 20px !important;
+}
+.calculator .form-wrap {
+  width: 45vw;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=main.css.map */

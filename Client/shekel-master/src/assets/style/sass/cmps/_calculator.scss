@@ -1,0 +1,18 @@
+.calculator {
+  h2{
+    margin-block-start: 30px;
+  }
+  button {
+    margin-block-start: 10px !important;
+    margin-block-end: 20px !important;
+  }
+
+  input {
+    margin-block-end: 20px !important;
+  }
+
+  .form-wrap{
+    width: 45vw;
+    margin: 0 auto;
+  }
+}

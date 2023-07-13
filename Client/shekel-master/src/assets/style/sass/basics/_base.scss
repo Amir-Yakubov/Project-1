@@ -1,40 +1,56 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 ::selection {
-    background-color: $clr8;
-    color: $clr6;
+  background-color: $clr8;
+  color: $clr6;
 }
 
 html {
-    font-family: montserrat;
-    line-height: 1.6;
-    color: $clr2;
-    lang: he;
+  font-family: montserrat;
+  line-height: 1.6;
+  color: $clr2;
+  lang: he;
 }
 
 body {
-    font-size: rem(18px);
-    margin: auto!important;
+  font-size: rem(18px);
+  margin: auto !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: Ploni;
-    margin: 0 0 0.6em;
-    line-height: 1;
+  font-family: Ploni;
+  margin: 0 0 0.6em;
+  line-height: 1;
 }
 
+input {
+  text-align: right;
+}
 
 section, main, footer {
-    padding: 5px;
+  padding: 5px;
 }
 
 img {
-    //width: 100%;
+  //width: 100%;
 }
 
 p {
-    margin: 0 0 1em;
+  margin: 0 0 1em;
+}
+
+.loader {
+  height: 100px;
+  position: absolute;
+  top: 70%;
+  left: 48.3%;
+  transform: translate(-50%, -50%);
+}
+
+.loader-wrap {
+//  position: relative;
+  height: 100vh;
 }
 

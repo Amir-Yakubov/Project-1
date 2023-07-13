@@ -9,6 +9,13 @@ table {
   text-align: center;
   vertical-align: middle;
 
+
+  a {
+    display: block;
+    text-align: center;
+    color: #3cb371;
+  }
+
   td{
     text-align: center;
     vertical-align: middle;
@@ -25,7 +32,3 @@ h5, h6 {
   padding: 0 !important;
 }
 
-a {
-  display: block;
-  text-align: center;
-}

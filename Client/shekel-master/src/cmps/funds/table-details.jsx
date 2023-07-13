@@ -5,7 +5,7 @@ import React from "react";
 export function TableDetails({funds, i}) {
     let formattedDateTime;
 
-    if (funds && funds[0]) {
+    if (funds.length && funds[0].length) {
         const date = new Date(funds[0].CURRENT_DATE);
         formattedDateTime = formatDateHebrew(date);
     }
@@ -35,13 +35,12 @@ export function TableDetails({funds, i}) {
             relevantMonthName = monthNamesHebrew[month - 1];
         }
         return relevantMonthName;
-    };
+    }
 
     const speciality = ['רמת סיכון גבוה (בעיקר מניות)', 'רמת סיכון בינונית (עד 50% מניות)', 'רמת סיכון נמוכה (בעיקר אג"ח)'];
-
     return (
         <>
-            <Table striped bordered hover dir='rtl' className={`fund-table ${i}`}>
+            {(funds && funds.length) && <Table striped bordered hover dir='rtl' className={`fund-table ${i}`}>
                 <thead>
                 <tr>
                     <td colSpan={6}>
@@ -85,7 +84,7 @@ export function TableDetails({funds, i}) {
                     <td>{funds[2].YIELD_TRAILING_5_YRS}%</td>
                 </tr>
                 </tbody>
-            </Table>
+            </Table>}
         </>
     )
 }
