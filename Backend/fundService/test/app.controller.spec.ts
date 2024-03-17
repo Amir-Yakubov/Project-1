@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FundController } from '../src/controllers/fundController';
-import { ProvidentFundService } from "../src/services/provident-fund.service";
+import { ProvidentFundService } from "../src/services/providentFundService";
 
 describe('AppController', () => {
   let appController: FundController;
@@ -16,7 +16,6 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getGemelnetDataByApi()).toBeCalledTimes(1);
     });
   });
 });

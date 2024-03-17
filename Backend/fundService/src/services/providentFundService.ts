@@ -2,7 +2,7 @@ import {Injectable} from '@nestjs/common';
 import axios from "axios";
 import {FundDTO} from "../../dto/fundDTO";
 import {getDateFormatted} from "../utils/time"
-import {GOVERNMENT_BASE_URL, PROVIDENT_FUND_RESOURCE_ID,} from "../utils/Constans";
+import {GOVERNMENT_BASE_URL, PROVIDENT_FUND_RESOURCE_ID,} from "../utils/Constants";
 import {FUND_CLASSIFICATION_ENUM} from "../Enum/FUND_CLASSIFICATION_ENUM";
 import {SUB_SPECIALIZATION_ENUM} from "../Enum/SUB_SPECIALIZATION_ENUM";
 
@@ -12,7 +12,7 @@ export class ProvidentFundService {
     public async getData(fund_classification, specialization) {
         const date = getDateFormatted();
         const {data} = await axios.get(
-            GOVERNMENT_BASE_URL + PROVIDENT_FUND_RESOURCE_ID + `&q=${fund_classification}` + `&q=${specialization}` + `&q=${date}`);
+            GOVERNMENT_BASE_URL + PROVIDENT_FUND_RESOURCE_ID + `&q=${fund_classification}` + `&q=${specialization}`);
         data.result.records.sort((a, b) => b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS);
         return data.result.records as FundDTO[];
     }
@@ -36,7 +36,7 @@ export class ProvidentFundService {
 
         const requests = fundClassifications.map(([fund_classification, sub_specialization]) =>
             axios.get(
-                `${GOVERNMENT_BASE_URL}${PROVIDENT_FUND_RESOURCE_ID}&q=${fund_classification}&q=${sub_specialization}&q=${date}`
+                `${GOVERNMENT_BASE_URL}${PROVIDENT_FUND_RESOURCE_ID}&q=${fund_classification}&q=${sub_specialization}`
             )
         );
 

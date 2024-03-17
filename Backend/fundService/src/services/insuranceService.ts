@@ -1,42 +1,49 @@
 import {Injectable} from '@nestjs/common';
 import axios from "axios";
 import {FundDTO} from "../../dto/fundDTO";
-import {GOVERNMENT_BASE_URL, INSURANCE_RESOURCE_ID} from "../utils/Constans";
+import {GOVERNMENT_BASE_URL, INSURANCE_RESOURCE_ID} from "../utils/Constants";
 import {getDateFormatted} from "../utils/time"
-import {FUND_CLASSIFICATION_ENUM} from "../Enum/FUND_CLASSIFICATION_ENUM";
 import {SUB_SPECIALIZATION_ENUM} from "../Enum/SUB_SPECIALIZATION_ENUM";
 
 @Injectable()
 export class InsuranceService {
 
-    public async getData(SPECIALIZATION) {
+    public async getData(SPECIALIZATION: SUB_SPECIALIZATION_ENUM) {
         const date = getDateFormatted();
-        const {data} = await axios.get(
-            GOVERNMENT_BASE_URL + INSURANCE_RESOURCE_ID + `&q=${SPECIALIZATION}` + `&q=${date}`);
-        data.result.records.sort((a, b) => b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS);
-        return data.result.records as FundDTO[];
+        let sortedFunds: FundDTO[];
+        try {
+            const {data} = await axios.get(GOVERNMENT_BASE_URL + INSURANCE_RESOURCE_ID + `&q=${SPECIALIZATION}`);
+            data.result.records.sort((a, b) => b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS);
+            sortedFunds = data.result.records;
+            console.log('INSURANCE sorted funds', sortedFunds);
+        } catch (error) {
+            console.log('Failed to get Funds From DB', error);
+        }
+        return sortedFunds as FundDTO[];
     }
 
     public async getFunds() {
-        const date = getDateFormatted();
-        const subSpecializations = [
+        let sortedFunds: any[];
+        const subSpecializations: SUB_SPECIALIZATION_ENUM[] = [
             SUB_SPECIALIZATION_ENUM.STOCKS,
             SUB_SPECIALIZATION_ENUM.GENERAL,
             SUB_SPECIALIZATION_ENUM.BONDS
         ];
 
         const requests = subSpecializations.map(specialization =>
-            axios.get(`${GOVERNMENT_BASE_URL}${INSURANCE_RESOURCE_ID}&q=${specialization}&q=${date}`)
+            axios.get(`${GOVERNMENT_BASE_URL}${INSURANCE_RESOURCE_ID}&q=${specialization}`)
         );
 
-        const responses = await axios.all(requests);
-        const sortedData = responses.map(response =>
-            response.data.result.records.sort(
-                (a, b) => b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS
-            )
-        );
+        try {
+            const responses = await axios.all(requests);
+            sortedFunds = responses.map(response =>
+                response.data.result.records.sort((a, b) =>
+                    b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS));
+        } catch (error) {
+            console.log('Failed to get insurance funds', error);
+        }
 
-        return [sortedData];
+        return [sortedFunds.slice(0, 3)];
         // [SAVINGS_POLICY_FUNDS]
     }
 }

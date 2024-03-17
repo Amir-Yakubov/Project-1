@@ -2,7 +2,7 @@ import { Schema } from "dynamoose";
 import { ModelDefinition } from "nestjs-dynamoose";
 import { schemaDefaultSetting } from "../common/SchemaDefaultSettings";
 import { TABLES } from "../common/Tables";
-import { NODE_ENV } from "../../utils/Constans";
+import { NODE_ENV } from "../../utils/Constants";
 
 export class FundsPK {
   fund_id: string;

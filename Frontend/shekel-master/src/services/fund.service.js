@@ -3,41 +3,39 @@ import {httpService} from "./http.service";
 const BASE_URL = 'fund_service/'
 
 export const fundService = {
-    query,
-    get,
-    remove,
-    getProvidentFunds,
-    getPensionFunds,
-    getInsuranceFunds,
-    save,
-    getDefaultFundFilter,
+    getFunds,
+    // getDefaultFundFilter
 };
 
 window.cs = fundService;
 
+async function getFunds() {
+    return await httpService.get(BASE_URL);
+}
+
 async function getProvidentFunds() {
-    return httpService.get(BASE_URL + 'provident_funds/');
+    return await httpService.get(BASE_URL + 'provident_funds/');
 }
 
 async function getPensionFunds() {
-    return httpService.get(BASE_URL + 'pension_funds/');
+    return await httpService.get(BASE_URL + 'pension_funds/');
 }
 
 async function getInsuranceFunds() {
-    return httpService.get(BASE_URL + 'insurance_funds/');
+    return await httpService.get(BASE_URL + 'insurance_funds/');
 }
 
 async function query(filterBy = {title: ''}) {
     const queryParams = `?title=${filterBy.title}`;
-    return httpService.get(BASE_URL + queryParams);
+    return await httpService.get(BASE_URL + queryParams);
 }
 
-function get(fundId) {
-    return httpService.get(BASE_URL + fundId);
+async function get(fundId) {
+    return await httpService.get(BASE_URL + fundId);
 }
 
 async function remove(fundId) {
-    return httpService.delete(BASE_URL + fundId);
+    return await httpService.delete(BASE_URL + fundId);
 }
 
 async function save(fund) {
