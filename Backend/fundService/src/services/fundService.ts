@@ -1,47 +1,57 @@
 import {Injectable} from "@nestjs/common";
-import {InsuranceService} from "./insuranceService";
+import {PensionFundDTO} from "../dto/pensionFundDTO";
+import {GovAdapter} from "../adapters/govAdapter";
+import {RESOURCE_ID_ENUM} from "../Enum/RESOURCE_ID_ENUM";
 import {PensionService} from "./pensionService";
-import {ProvidentFundService} from "./providentFundService";
+import {ProvidentService} from "./providentService";
+import {ProvidentFundDTO} from "../dto/providentFundDTO";
+import {InsuranceService} from "./insuranceService";
+import {InsuranceFundDTO} from "../dto/insuranceFundDTO";
 
 @Injectable()
 export class FundService {
-    constructor
-    (
-        private insuranceService: InsuranceService,
-        private providentFundService: ProvidentFundService,
-        private pensionService: PensionService,
+    constructor(
+        private readonly govAdapter: GovAdapter,
+        private readonly pensionService: PensionService,
+        private readonly providentService: ProvidentService,
+        private readonly insuranceService: InsuranceService
     ) {
     }
 
-    public async getFunds() {
-        let funds: any[] = [];
-        try {
-            funds.push(await this.pensionService.getFunds());
-            funds.push(await this.providentFundService.getFunds());
-            funds.push(await this.insuranceService.getFunds());
-        } catch (error) {
-            console.error('Failed to get funds', error);
-        }
-        return funds;
+    public async initFunds() {
+
+        const newFunds: any = await this.getNewFunds();
+        await this.saveFundsToDB(newFunds);
+        const timeRelevance = await this.getTimeRelevance();
+        // if date > 15 and tableDate more than prev month init funds
     }
 
-    // public async getFunds(): Promise<string[]> {
-    //     const resource_ids: string[] = [PENSION_RESOURCE_ID, PROVIDENT_FUND_RESOURCE_ID, INSURANCE_RESOURCE_ID];
-    //     let funds: string[] = [];
-    //
-    //     try {
-    //         const requests = resource_ids.map(async resource =>
-    //             await axios.get(`${GOVERNMENT_BASE_URL}${resource}`));
-    //
-    //         const responses = await axios.all(requests);
-    //
-    //         funds = responses.map(response =>
-    //             response.data.result.records.sort((a, b) =>
-    //                 b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS));
-    //
-    //     } catch (error) {
-    //         console.log('Failed to get funds', error);
-    //     }
-    //     return funds;
-    // }
+    private async getNewFunds() {
+        try {
+            const pensionFunds: PensionFundDTO[] = await this.govAdapter.getFunds(RESOURCE_ID_ENUM.PENSION_RESOURCE_ID);
+            const providentFunds: ProvidentFundDTO[] = await this.govAdapter.getFunds(RESOURCE_ID_ENUM.PROVIDENT_FUND_RESOURCE_ID);
+            const insuranceFunds: InsuranceFundDTO[] = await this.govAdapter.getFunds(RESOURCE_ID_ENUM.INSURANCE_RESOURCE_ID);
+
+            return {pensionFunds, providentFunds, insuranceFunds};
+        } catch (error) {
+            console.error('Failed to get new funds', error);
+        }
+    }
+
+
+    private async saveFundsToDB(
+        newFunds: { pensionFunds: [], providentFunds: [], insuranceFunds: [] }) {
+        try {
+            await this.pensionService.saveFunds(newFunds.pensionFunds);
+            await this.providentService.saveFunds(newFunds.providentFunds);
+            await this.insuranceService.saveFunds(newFunds.insuranceFunds);
+        } catch (error) {
+            console.error('Failed to save funds', error);
+        }
+    }
+    private async getTimeRelevance() {
+        const currentDate: Date = new Date();
+        const day: number = currentDate.getDate();
+        const month: number = currentDate.getMonth() + 1;
+    }
 }

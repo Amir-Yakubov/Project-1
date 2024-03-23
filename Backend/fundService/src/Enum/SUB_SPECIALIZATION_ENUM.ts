@@ -7,6 +7,7 @@ export enum SUB_SPECIALIZATION_ENUM {
     AGED_60_AND_OVER = 'לבני 60 ומעלה',
     INCREASED_RISK = 'סיכון מוגבר',
     MEDIUM_RISK = 'סיכון בינוני',
-    LITTLE_RISK = 'סיכון מועט'
+    LITTLE_RISK = 'סיכון מועט',
+    NONE = ''
 }
 
