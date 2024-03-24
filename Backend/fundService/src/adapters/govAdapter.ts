@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
 import {PensionFundDTO} from "../dto/pensionFundDTO";
 import {FUND_CLASSIFICATION_ENUM} from "../Enum/FUND_CLASSIFICATION_ENUM";
-import {SUB_SPECIALIZATION_ENUM} from "../Enum/SUB_SPECIALIZATION_ENUM";
+import {SPECIALIZATION_ENUM} from "../Enum/SPECIALIZATION_ENUM";
 import axios from "axios";
 import {GOVERNMENT_BASE_URL} from "../utils/Constants";
 import {RESOURCE_ID_ENUM} from "../Enum/RESOURCE_ID_ENUM";
@@ -18,11 +18,11 @@ export class GovAdapter {
         let insuranceFunds = [];
         try {
             pensionFunds = await this.getFunds(RESOURCE_ID_ENUM.PENSION_RESOURCE_ID,
-                FUND_CLASSIFICATION_ENUM.NONE, SUB_SPECIALIZATION_ENUM.NONE);
+                FUND_CLASSIFICATION_ENUM.NONE, SPECIALIZATION_ENUM.NONE);
             providentFunds = await this.getFunds(RESOURCE_ID_ENUM.PROVIDENT_FUND_RESOURCE_ID,
-                FUND_CLASSIFICATION_ENUM.NONE, SUB_SPECIALIZATION_ENUM.NONE);
+                FUND_CLASSIFICATION_ENUM.NONE, SPECIALIZATION_ENUM.NONE);
             insuranceFunds = await this.getFunds(RESOURCE_ID_ENUM.INSURANCE_RESOURCE_ID,
-                FUND_CLASSIFICATION_ENUM.NONE, SUB_SPECIALIZATION_ENUM.NONE);
+                FUND_CLASSIFICATION_ENUM.NONE, SPECIALIZATION_ENUM.NONE);
         } catch (error) {
             console.error('Failed to init funds', error);
         }
@@ -32,7 +32,7 @@ export class GovAdapter {
     public async getFunds(
         RESOURCE_ID: RESOURCE_ID_ENUM,
         FUND_CLASSIFICATION: FUND_CLASSIFICATION_ENUM = FUND_CLASSIFICATION_ENUM.NONE,
-        SUB_SPECIALIZATION: SUB_SPECIALIZATION_ENUM = SUB_SPECIALIZATION_ENUM.NONE
+        SUB_SPECIALIZATION: SPECIALIZATION_ENUM = SPECIALIZATION_ENUM.NONE
     ) {
 
         let url: string = GOVERNMENT_BASE_URL + `${RESOURCE_ID}`;

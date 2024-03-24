@@ -19,14 +19,16 @@ export class FundService {
     }
 
     public async initFunds() {
-
-        const newFunds: any = await this.getNewFunds();
-        await this.saveFundsToDB(newFunds);
-        const timeRelevance = await this.getTimeRelevance();
-        // if date > 15 and tableDate more than prev month init funds
+        const isDataUpdated: boolean = await this.getTimeRelevance();
+        if (!isDataUpdated) {
+            console.log('Entered');
+            const newFunds = await this.getFundsFromGov();
+            await this.saveFundsToDB(newFunds);
+        }
+        return await this.getFundsForDisplay();
     }
 
-    private async getNewFunds() {
+    private async getFundsFromGov() {
         try {
             const pensionFunds: PensionFundDTO[] = await this.govAdapter.getFunds(RESOURCE_ID_ENUM.PENSION_RESOURCE_ID);
             const providentFunds: ProvidentFundDTO[] = await this.govAdapter.getFunds(RESOURCE_ID_ENUM.PROVIDENT_FUND_RESOURCE_ID);
@@ -38,20 +40,33 @@ export class FundService {
         }
     }
 
-
-    private async saveFundsToDB(
-        newFunds: { pensionFunds: [], providentFunds: [], insuranceFunds: [] }) {
+    private async saveFundsToDB(funds: {
+        pensionFunds: PensionFundDTO[], providentFunds: ProvidentFundDTO[],
+        insuranceFunds: InsuranceFundDTO[]
+    }) {
         try {
-            await this.pensionService.saveFunds(newFunds.pensionFunds);
-            await this.providentService.saveFunds(newFunds.providentFunds);
-            await this.insuranceService.saveFunds(newFunds.insuranceFunds);
+            await this.pensionService.saveFunds(funds.pensionFunds);
+            await this.providentService.saveFunds(funds.providentFunds);
+            await this.insuranceService.saveFunds(funds.insuranceFunds);
         } catch (error) {
             console.error('Failed to save funds', error);
         }
     }
+
+    private async getFundsForDisplay() {
+        try {
+            const topPension: PensionFundDTO[][][] = await this.pensionService.getTop3();
+            const topProvident: ProvidentFundDTO[][][] = await this.providentService.getTop3();
+            const topInsurance: InsuranceFundDTO[][][] = await this.insuranceService.getTop3();
+            return [topPension, topProvident, topInsurance];
+        } catch (error) {
+            console.error('Failed to get top 3 funds', error);
+        }
+    }
+
     private async getTimeRelevance() {
-        const currentDate: Date = new Date();
-        const day: number = currentDate.getDate();
-        const month: number = currentDate.getMonth() + 1;
+        const day: number = new Date().getDate();
+        console.log('day !== 16', day !== 16);
+        return day !== 16;
     }
 }

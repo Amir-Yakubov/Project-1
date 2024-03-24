@@ -12,14 +12,14 @@ export class InsuranceFundsPK {
 const insuranceFundsSchema = new Schema(
     {
         CURRENT_DATE: {
-                type: String,
-                hashKey: true,
-                index: {
-                        name: 'YIELD_5_INDEX',
-                        type: 'global',
-                        project: true,
-                        rangeKey: 'YIELD_TRAILING_5_YRS'
-                },
+            type: String,
+            hashKey: true,
+            index: {
+                name: 'YIELD_5_INDEX',
+                type: 'global',
+                project: true,
+                rangeKey: 'YIELD_TRAILING_5_YRS'
+            },
         },
         _id: {type: String, rangeKey: true},
         FUND_ID: String,

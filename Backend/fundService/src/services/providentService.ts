@@ -4,6 +4,9 @@ import {TABLES} from "../ddb/common/Tables";
 import {ProvidentFundDTO} from "../dto/providentFundDTO";
 import {ProvidentFundsPK} from "../ddb/models/providentFundsModel";
 import {splitArrayIntoBatches} from "../utils/utilFunctions";
+import {SortOrder} from "dynamoose/dist/General";
+import {FUND_CLASSIFICATION_ENUM} from "../Enum/FUND_CLASSIFICATION_ENUM";
+import {SPECIALIZATION_ENUM} from "../Enum/SPECIALIZATION_ENUM";
 
 @Injectable()
 export class ProvidentService {
@@ -12,8 +15,9 @@ export class ProvidentService {
         private readonly providentFundsModel: Model<ProvidentFundDTO, ProvidentFundsPK>,
     ) {
     }
+
     public async saveFunds(providentFunds: ProvidentFundDTO[]) {
-        const fundsToSave: ProvidentFundDTO[][] = splitArrayIntoBatches(providentFunds ,25);
+        const fundsToSave: ProvidentFundDTO[][] = splitArrayIntoBatches(providentFunds, 25);
         try {
             return fundsToSave.map(async (fundsBatch, i) =>
                 await this.providentFundsModel.batchPut(fundsBatch));
@@ -21,55 +25,148 @@ export class ProvidentService {
             console.error('Failed to save pension funds', error);
         }
     }
+    public async getTop3() {
+        let childrenFundsA: ProvidentFundDTO[];
+        let childrenFundsB: ProvidentFundDTO[];
+        let childrenFundsC: ProvidentFundDTO[];
+        let providentForInvestA: ProvidentFundDTO[];
+        let providentForInvestB: ProvidentFundDTO[];
+        let providentForInvestC: ProvidentFundDTO[];
+        let educationFundsA: ProvidentFundDTO[];
+        let educationFundsB: ProvidentFundDTO[];
+        let educationFundsC: ProvidentFundDTO[];
+        let providentFundsA: ProvidentFundDTO[];
+        let providentFundsB: ProvidentFundDTO[];
+        let providentFundsC: ProvidentFundDTO[];
+        try {
+            childrenFundsA = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_NAME')
+                .contains(FUND_CLASSIFICATION_ENUM.CHILDREN_FUND)
+                .where('SUB_SPECIALIZATION')
+                .contains(SPECIALIZATION_ENUM.INCREASED_RISK)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
 
-    // public async getFunds() {
-    //     let sortedFunds = [];
-    //     const fundClassifications = [
-    //         [FUND_CLASSIFICATION_ENUM.CHILDREN_FUND, SUB_SPECIALIZATION_ENUM.INCREASED_RISK],
-    //         [FUND_CLASSIFICATION_ENUM.CHILDREN_FUND, SUB_SPECIALIZATION_ENUM.MEDIUM_RISK],
-    //         [FUND_CLASSIFICATION_ENUM.CHILDREN_FUND, SUB_SPECIALIZATION_ENUM.LITTLE_RISK],
-    //         [FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND_FOR_INVESTMENT, SUB_SPECIALIZATION_ENUM.STOCKS],
-    //         [FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND_FOR_INVESTMENT, SUB_SPECIALIZATION_ENUM.GENERAL],
-    //         [FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND_FOR_INVESTMENT, SUB_SPECIALIZATION_ENUM.BONDS],
-    //         [FUND_CLASSIFICATION_ENUM.EDUCATION_FUND, SUB_SPECIALIZATION_ENUM.STOCKS],
-    //         [FUND_CLASSIFICATION_ENUM.EDUCATION_FUND, SUB_SPECIALIZATION_ENUM.GENERAL],
-    //         [FUND_CLASSIFICATION_ENUM.EDUCATION_FUND, SUB_SPECIALIZATION_ENUM.BONDS],
-    //         [FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND, SUB_SPECIALIZATION_ENUM.STOCKS],
-    //         [FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND, SUB_SPECIALIZATION_ENUM.GENERAL],
-    //         [FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND, SUB_SPECIALIZATION_ENUM.BONDS],
-    //     ];
-    //
-    //     try {
-    //         const requests = fundClassifications.map(async ([fund_classification, sub_specialization]) =>
-    //             await axios.get(`${GOVERNMENT_BASE_URL}${RESOURCE_ID_ENUM.PROVIDENT_FUND_RESOURCE_ID}&q=${fund_classification}&q=${sub_specialization}`)
-    //         );
-    //         const responses = await axios.all(requests);
-    //         sortedFunds = responses.map(response => {
-    //             response.data.result.records.sort((a, b) =>
-    //                 b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS);
-    //
-    //             response.data.result.records.map(fund => {
-    //                 for (let key in fund) {
-    //                     fund[key] = `${fund[key]}`
-    //                 }
-    //             });
-    //             return response.data.result.records as PensionFundDTO[];
-    //         });
-    //
-    //     } catch (error) {
-    //         console.error('Failed to get provident funds', error);
-    //     }
-    //     // const fundsToSave = [...sortedFunds];
-    //     // const batches = splitArrayIntoBatches(fundsToSave, 25);
-    //     // batches.map(async batch => await this.providentFundsModel.batchPut(batch));
-    //
-    //     return [
-    //         sortedFunds.slice(0, 3),
-    //         sortedFunds.slice(3, 6),
-    //         sortedFunds.slice(6, 9),
-    //         sortedFunds.slice(9, 12)
-    //     ];
-    //
-    //     // [CHILDREN_FUND, PROVIDENT_FUND_FOR_INVESTMENT, EDUCATION_FUND, PROVIDENT_FUND]
-    // }
+            childrenFundsB = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_NAME')
+                .contains(FUND_CLASSIFICATION_ENUM.CHILDREN_FUND)
+                .where('SUB_SPECIALIZATION')
+                .contains(SPECIALIZATION_ENUM.MEDIUM_RISK)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            childrenFundsC = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_NAME')
+                .contains(FUND_CLASSIFICATION_ENUM.CHILDREN_FUND)
+                .where('SUB_SPECIALIZATION')
+                .contains(SPECIALIZATION_ENUM.LITTLE_RISK)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            providentForInvestA = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND_FOR_INVESTMENT)
+                .where('SPECIALIZATION')
+                .contains(SPECIALIZATION_ENUM.STOCKS)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            providentForInvestB = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND_FOR_INVESTMENT)
+                .where('SPECIALIZATION')
+                .contains(SPECIALIZATION_ENUM.GENERAL)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            providentForInvestC = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND_FOR_INVESTMENT)
+                .where('SPECIALIZATION')
+                .contains(SPECIALIZATION_ENUM.BONDS)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            educationFundsA = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.EDUCATION_FUND)
+                .where('SPECIALIZATION')
+                .eq(SPECIALIZATION_ENUM.STOCKS)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            educationFundsB = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.EDUCATION_FUND)
+                .where('SPECIALIZATION')
+                .eq(SPECIALIZATION_ENUM.GENERAL)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            educationFundsC = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.EDUCATION_FUND)
+                .where('SPECIALIZATION')
+                .eq(SPECIALIZATION_ENUM.BONDS)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            providentFundsA = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND)
+                .where('SPECIALIZATION')
+                .eq(SPECIALIZATION_ENUM.STOCKS)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            providentFundsB = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND)
+                .where('SPECIALIZATION')
+                .eq(SPECIALIZATION_ENUM.GENERAL)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            providentFundsC = await this.providentFundsModel.query('CURRENT_DATE')
+                .eq('2024-03-23T00:00:00')
+                .where('FUND_CLASSIFICATION')
+                .eq(FUND_CLASSIFICATION_ENUM.PROVIDENT_FUND)
+                .where('SPECIALIZATION')
+                .eq(SPECIALIZATION_ENUM.BONDS)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+        } catch (error) {
+            console.error('Failed to get provident funds', error);
+        }
+        return [
+            [childrenFundsA.slice(0, 3), childrenFundsB.slice(0, 3), childrenFundsC.slice(0, 3)],
+            [providentForInvestA.slice(0, 3), providentForInvestB.slice(0, 3), providentForInvestC.slice(0, 3)],
+            [educationFundsA.slice(0, 3), educationFundsB.slice(0, 3), educationFundsC.slice(0, 3)],
+            [providentFundsA.slice(0, 3), providentFundsB.slice(0, 3), providentFundsC.slice(0, 3)]
+        ]
+    }
 }

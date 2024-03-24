@@ -4,6 +4,8 @@ import {TABLES} from "../ddb/common/Tables";
 import {InsuranceFundsPK} from "../ddb/models/insuranceFundsModel";
 import {InsuranceFundDTO} from "../dto/insuranceFundDTO";
 import {splitArrayIntoBatches} from "../utils/utilFunctions";
+import {SortOrder} from "dynamoose/dist/General";
+import {SPECIALIZATION_ENUM} from "../Enum/SPECIALIZATION_ENUM";
 
 @Injectable()
 export class InsuranceService {
@@ -13,6 +15,7 @@ export class InsuranceService {
         private readonly insuranceFundsModel: Model<InsuranceFundDTO, InsuranceFundsPK>,
     ) {
     }
+
     public async saveFunds(insuranceFunds: InsuranceFundDTO[]) {
         const fundsToSave: InsuranceFundDTO[][] = splitArrayIntoBatches(insuranceFunds, 25);
         try {
@@ -23,53 +26,38 @@ export class InsuranceService {
         }
     }
 
-    // public async getData(SPECIALIZATION: SUB_SPECIALIZATION_ENUM) {
-    //     let sortedFunds: PensionFundDTO[];
-    //     try {
-    //         const {data} = await axios.get(GOVERNMENT_BASE_URL + RESOURCE_ID_ENUM.INSURANCE_RESOURCE_ID + `&q=${SPECIALIZATION}`);
-    //         data.result.records.sort((a, b) => b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS);
-    //         sortedFunds = data.result.records;
-    //         console.log('INSURANCE sorted funds', sortedFunds);
-    //     } catch (error) {
-    //         console.log('Failed to get Funds From DB', error);
-    //     }
-    //     return sortedFunds as PensionFundDTO[];
-    // }
-    //
-    // public async getFunds() {
-    //     let sortedFunds: any[];
-    //     const subSpecializations: SUB_SPECIALIZATION_ENUM[] = [
-    //         SUB_SPECIALIZATION_ENUM.STOCKS,
-    //         SUB_SPECIALIZATION_ENUM.GENERAL,
-    //         SUB_SPECIALIZATION_ENUM.BONDS
-    //     ];
-    //
-    //     try {
-    //         const requests = subSpecializations.map(async specialization =>
-    //             await axios.get(`${GOVERNMENT_BASE_URL}${RESOURCE_ID_ENUM.INSURANCE_RESOURCE_ID}&q=${specialization}`));
-    //
-    //         const responses = await axios.all(requests);
-    //         sortedFunds = responses.map(response => {
-    //             response.data.result.records.sort((a, b) =>
-    //                 b.AVG_ANNUAL_YIELD_TRAILING_5YRS - a.AVG_ANNUAL_YIELD_TRAILING_5YRS);
-    //
-    //             response.data.result.records.map(fund => {
-    //                 for (let key in fund) {
-    //                     fund[key] = `${fund[key]}`
-    //                 }
-    //             });
-    //             return response.data.result.records as PensionFundDTO[];
-    //         });
-    //
-    //     } catch (error) {
-    //         console.log('Failed to get insurance funds', error);
-    //     }
-    //
-    //     // const fundsToSave = [...sortedFunds];
-    //     // const batches = splitArrayIntoBatches(fundsToSave, 25);
-    //     // batches.map(async batch => await this.insuranceFundsModel.batchPut(batch));
-    //     return [sortedFunds];
-    //
-    //     // [SAVINGS_POLICY_FUNDS]
-    // }
+    public async getTop3() {
+        let insuranceFundsA: InsuranceFundDTO[];
+        let insuranceFundsB: InsuranceFundDTO[];
+        let insuranceFundsC: InsuranceFundDTO[];
+        try {
+            insuranceFundsA = await this.insuranceFundsModel.query('CURRENT_DATE')
+                .eq('3/14/2024 12:00:00 AM')
+                .where('FUND_NAME')
+                .contains(SPECIALIZATION_ENUM.STOCKS)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            insuranceFundsB = await this.insuranceFundsModel.query('CURRENT_DATE')
+                .eq('3/14/2024 12:00:00 AM')
+                .where('FUND_NAME')
+                .contains(SPECIALIZATION_ENUM.GENERAL)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+            insuranceFundsC = await this.insuranceFundsModel.query('CURRENT_DATE')
+                .eq('3/14/2024 12:00:00 AM')
+                .where('FUND_NAME')
+                .contains(SPECIALIZATION_ENUM.BONDS)
+                .using('YIELD_5_INDEX')
+                .sort(SortOrder.descending)
+                .exec();
+
+        } catch (error) {
+            console.error('Failed to get insurance funds', error);
+        }
+        return [[insuranceFundsA.slice(0, 3), insuranceFundsB.slice(0, 3), insuranceFundsC.slice(0, 3)]];
+    }
 }
